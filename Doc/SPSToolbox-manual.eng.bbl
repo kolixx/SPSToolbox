@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{Csaji2012Sysid}
+B.~Csáji, M.~Campi, and E.~Weyer, ``Non-asymptotic confidence regions for the
+  least-squares estimate,'' in {\em Proceedings of the 16th IFAC Symposium on
+  System Identification (SYSID 2012)}, pp.~227--232, 2012.
+
+\bibitem{Csaji2012CDC}
+B.~Csáji, M.~Campi, and E.~Weyer, ``Sign-perturbed sums (sps): A method for
+  constructing exact finite-sample confidence regions for general linear
+  systems,'' in {\em Decision and Control (CDC), 2012 IEEE 51st Annual
+  Conference on}, pp.~7321--7326, 2012.
+
+\bibitem{Kolumban2013CDC}
+S.~Kolumbán and I.~Vajk, ``Exploring confidence sets constructed using
+  sign-perturbed sums,'' in {\em Decision and Control (CDC), 2013 IEEE 52st
+  Annual Conference on}, 2013.
+
+\bibitem{ljung1999SysId}
+L.~Ljung, {\em System Identification - Theory for the User, 2nd edition},
+  vol.~2 of {\em PTR Prentice Hall Information and System Sciences Series}.
+\newblock 1999.
+
+\end{thebibliography}

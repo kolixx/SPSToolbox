@@ -43,7 +43,6 @@ function [N] = CalculateBJNoiseRealization(model, Y, U)
     B = model.B;
     B = [zeros(1, length(AF)-length(B)) B];
     C = model.C;
-    %C = [zeros(1, length(AD)-length(C)) C];
     if (length(C)~= length(AD))
         % assumption 2
         error('Noise model not properly invertible');
