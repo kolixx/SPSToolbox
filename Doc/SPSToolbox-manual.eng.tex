@@ -96,6 +96,8 @@
 
 This document briefly introduces a hypothesis testing procedure called sign perturbed sums (SPS) and describes the use of the Matlab Toolbox that implements it. The method was developed in a series of papers \cite{Csaji2012Sysid, Csaji2012CDC, Kolumban2013CDC}. The method allows hypothesis testing of parameters in case of linear regression problems and in case of LTI Box Jenkins models (\cite{ljung1999SysId}). The important features of the method are that the only assumption about the noise or error values is that they have symmetric distribution about zero and that no asymptotic theory is used. This means that the confidence of the hypothesis test is rigorous.
 
+For instruction on installation see Section~\ref{sec:Deploy}.
+
 The structure of the manual is as follows. Section~\ref{sec:ShortDescr} illustrates the principles of the algorithm without going into details on a toy example. More details can be found in the cited references. The methods provided by the toolbox and their usage is presented in Section~\ref{sec:Usage} and examples are given in Section~\ref{sec:Ex}.
 
 \section{Short description of the theory}
@@ -170,6 +172,8 @@ The basic underlying idea is that $m$ different identification problems are crea
 
 As we go to infinity with $\theta$ it is easy to see in this simple case that $Z_0$ will outgrow every other $Z$ value as the coefficient of $\theta$ is the largest here in absolute value.
 
+\pagebreak
+
 \section{Using the toolbox}
 \label{sec:Usage}
 
@@ -218,6 +222,10 @@ Output parameters:
 \item inconf: Boolean value showing that the given model is inside the confidence set or not.
 \end{itemize}
 
+\subsection{IsRegressionParamPartOfSPSConfidenceSet}
+
+
+
 \subsection{CalculateBJGradient}
 
 This routine calculates the gradient of the prediction errors for a given model and data.
@@ -250,6 +258,21 @@ Output parameters:
 \item N: column vector with the same length as the input or the output.
 \end{itemize}
 
+\subsection{DetermineRank}
+
+This routine is used to order count the number of values in a vector $Z$ that are greater that the first item.
+\begin{verse}
+[r] = DetermineRank(Z, perm)
+\end{verse}
+Input parameters:
+\begin{itemize}
+\item Z: row vector of length $m$.
+\item perm: a permutation of numbers $1, \ldots, m$
+\end{itemize}
+Output parameters:
+\begin{itemize}
+\item r: the number of values in $Z$ that are greater than $Z(1)$. If two values are equal in the vector, then their order is determined by the corresponding items in the given permutation.
+\end{itemize}
 
 \subsection{GenerateTestRegion}
 
@@ -305,15 +328,41 @@ Output parameters:
 \section{Examples}
 \label{sec:Ex}
 
-Along with the code of the toolbox, some example scripts are also attached to illustrate the usage of the routines. These can be found in the "Samples" folder. Samples for the linear regression hypothesis testing are in the "Linear regression" sub-folder, whereas samples related to Box-Jenkins models are in the "LTI systems" sub-folder.s
+Along with the code of the toolbox, some example scripts are also attached to illustrate the usage of the routines. These can be found in the "Samples" folder. Samples for the linear regression hypothesis testing are in the "Linear regression" sub-folder, whereas samples related to Box-Jenkins models are in the "LTI systems" sub-folder.
 
 \subsection{Linear regression}
+
+\subsubsection{testLTIMembership.m}
+
+Least squares estimates always belong to the SPS confidence set as in their case $Z_0 = 0$. This script illustrates this by calculating the LS estimate and checking its membership.
+
+\subsubsection{showConfidenceRegion.m}
+
+The structure of the confidence sets corresponding to a given SPS setup and data can be complex. This examples defines a fine grained grid around the LS estimate of a selected two parameter model and evaluates the membership on every grid point. The sample code demonstrates how to generate and plot confidence regions in two dimensions, the result is given on Figure~\ref{fig:ConfidenceRegionLR}.
+
+\begin{figure}[htb]
+ \centerline{\includegraphics[width=.5\columnwidth]{Figures/confidenceRegionLR.jpg}}
+ \caption{The 0.85 confidence region for a two parameter linear regression problem.}
+ \label{fig:ConfidenceRegionLR}
+\end{figure}
+
+\subsubsection{testLTIConfidence.m}
+
+This script is written to demonstrate that the SPS method indeed generates confidence regions with the required confidence level. A high number of membership queries are carried out for the nominal model on different confidence levels using different random noise values and SPS setups in each query. The membership answers are recorded and saved to the disk. The second part of the script visualizes the probability with which the nominal model was accepted to be in the confidence region or not.
+
+After 15000 queries in each confidence level, the results are given in FIgure~\ref{fig:ConfidenceLR}.
+
+\begin{figure}[htb]
+ \centerline{\includegraphics[width=.5\columnwidth]{Figures/confidenceLR.jpg}}
+ \caption{The relative frequency of accepting the nominal model at given confidence levels (red) and the prescribed values for this (blue).}
+ \label{fig:ConfidenceLR}
+\end{figure}
 
 \subsection{LTI systems}
 
 \subsubsection{testLTIMembership.m}
 
-Prediction error estimates always belong to the SPS confidence set as in their case $Z_0 = 0$. This script illustrates this by calculating the PEM estimate and checking its membership.
+Prediction error estimates always belong to the SPS confidence set as in their case $Z_0 = 0$. This script illustrates this by calculating the PEM estimate and checking its membership. The PEM estimate is calculated using the pem method in the Matlab System Identification Toolbox.
 
 \subsubsection{showConfidenceRegion.m}
 
@@ -337,7 +386,16 @@ After 15000 queries in each confidence level, the results are given in FIgure~\r
  \label{fig:Confidence}
 \end{figure}
 
-\section{Installation}
+\pagebreak
+
+\section{Deployment}
+\label{sec:Deploy}
+
+The code is available on GitHub using the following links: 
+\begin{itemize}
+\item GitHub repo history: \url{https://github.com/kolixx/SPSToolbox}
+\item link for cloning the repo: \url{git://github.com/kolixx/SPSToolbox.git}
+\end{itemize}
 
 Add the folder SPSToolbox to the Matlab path collection using the menu "File/Set Path...". Mind that Matlab should be running with administrative privileges during this operation.
 

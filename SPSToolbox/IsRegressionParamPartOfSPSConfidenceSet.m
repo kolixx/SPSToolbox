@@ -1,42 +1,40 @@
-function [inconf] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
+function [inconf] = IsRegressionParamPartOfSPSConfidenceSet(theta, sps, Y, X)
 %
-%  Gets if a given model is part of the sps confidence set or not.
+%  Gets if a given parameter vector theta is part of the sps confidence set or not.
+%
+%  The supposed model is that Y = X.' theta + error
+%
+%  Input parameters:
+%    - theta: a column vector of size n
+%    - sps: an sps setup correspnding to the same data length as X
+%    - Y: column vector of size N
+%    - X: an n x N matrix containing the regressor vectors as columns
+%
+%  Ouptut parameter:
+%    - inconf: true if the given model was part of the confidence set
 %
 
     % the matrix containing the sign perturbed noise ralizatons
     NN = zeros(length(Y), sps.m);
     
     % get the noise realization corresponding to the given model
-    NN(:,1) = CalculateBJNoiseRealization(model, Y, U);
+    NN(:,1) = Y - X.'*theta;
     
     % generate the sign perturbed noise samples
     for k=2:sps.m
         NN(:,k) = NN(:,1).*sps.Signs(:,k);
     end
     
-    % get the perturbed outputs
-    YY = zeros(length(Y), sps.m);
-    YY(:,1) = Y;
-    % this should be the nominal response
-    Y1 = SimulateBJSample(model, U, NN(:,1));
-    for k=2:sps.m
-        YY(:,k) = SimulateBJSample(model, U, NN(:,k));
-    end
-    
-    % calculate the psi matrix for each realization
     % calcualte Z_k value for the given ralization, and put it into a
     % vector
     Z = zeros(1, sps.m);
     
+    [~,R] = qr(X.');
+    Cov = R.'*R;
+        
     for k=1:sps.m
-        [Psi] = CalculateBJGradient(model, YY(:,k), U);
-        
         % sum l=1..n alpha it psi t Nt
-        Sum = Psi*NN(:,k);
-         
-        [~,R] = qr(Psi.');
-        Cov = R.'*R;
-        
+        Sum = X*NN(:,k);
         Z(k) = Sum.'/Cov* Sum;
     end
     
@@ -47,10 +45,3 @@ function [inconf] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
     % is it larger or equal to q, return true
     inconf = r >= sps.q;
 end
-
-
-
-
-
-
-

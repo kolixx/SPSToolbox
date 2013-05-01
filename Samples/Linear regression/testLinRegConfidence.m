@@ -19,11 +19,17 @@
 % clear the console and the workspace
 clc
 
-% the input signal will be one for the first K samples and -1 for the
-% second K samples
-K = 50;
-U = ones(K,1);
-U = [U; -U];
+% the nominal model
+theta= [1;...
+        0.3;...
+        2];
+% generate a random regressor matrix
+% the number of samples
+N = 100;
+% the dimension of theta
+n = length(theta);
+% the random regressors
+X = rand(n, N);
 
 % the number of independ trials for different confidence sets
 numTest = 15000;
@@ -37,14 +43,6 @@ indicators80 = zeros(1, numTest);
 indicators75 = zeros(1, numTest);
 indicators70 = zeros(1, numTest);
 
-
-% the definition of the nominal model
-model.A = [1];
-model.F = [1 (0.9+0.8) 0.9*0.8];
-model.B = [1];
-model.C = [1 0];
-model.D = [1 -0.1];
-
 % run the trials
 for testInstance = 1:numTest
     
@@ -52,26 +50,26 @@ for testInstance = 1:numTest
     testInstance
     
     % generate a noise sequence for the trial
-    N = (rand(length(U),1)-0.5)*0.1;
+    E = (rand(N,1)-0.5)*0.1;
     % calculate the noisy output of the system
-    [YN] = SimulateBJSample(model, U, N);
+    YN = X.'*theta + E;
 
     % generate sps setups for the different confidence levels
-    [sps95] = GenerateSPSSetup(1, 20, length(N));
-    [sps90] = GenerateSPSSetup(1, 10, length(N));
-    [sps85] = GenerateSPSSetup(3, 20, length(N));
-    [sps80] = GenerateSPSSetup(1, 5, length(N));
-    [sps75] = GenerateSPSSetup(1, 4, length(N));
-    [sps70] = GenerateSPSSetup(3, 10, length(N));
+    [sps95] = GenerateSPSSetup(1, 20, N);
+    [sps90] = GenerateSPSSetup(1, 10, N);
+    [sps85] = GenerateSPSSetup(3, 20, N);
+    [sps80] = GenerateSPSSetup(1, 5, N);
+    [sps75] = GenerateSPSSetup(1, 4, N);
+    [sps70] = GenerateSPSSetup(3, 10, N);
     
     % ask the membership of the nominal model in the confidence regions
     % defined by the different sps setups
-    indicators95(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps95, YN, U);
-    indicators90(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps90, YN, U);
-    indicators85(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps85, YN, U);
-    indicators80(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps80, YN, U);
-    indicators75(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps75, YN, U);
-    indicators70(testInstance) = IsModelPartOfSPSConfidenceSet(model, sps70, YN, U);
+    indicators95(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps95, YN, X);
+    indicators90(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps90, YN, X);
+    indicators85(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps85, YN, X);
+    indicators80(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps80, YN, X);
+    indicators75(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps75, YN, X);
+    indicators70(testInstance) = IsRegressionParamPartOfSPSConfidenceSet(theta, sps70, YN, X);
 
 end
 

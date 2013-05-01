@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.13)  1 MAY 2013 13:21
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.13)  1 MAY 2013 15:52
 entering extended mode
 **SPSToolbox-manual.eng.tex
 (D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.tex
@@ -381,50 +381,71 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 [1
 
 {C:/Users/kolixx/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 178.
+[3]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 182.
 
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\omsptm.fd"
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 178.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 182.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 183.
- [3] [4]
-[5] <Figures/confidenceRegion.jpg, id=132, 563.10374pt x 421.575pt>
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 187.
+ [4]
+[5] [6] <Figures/confidenceRegionLR.jpg, id=164, 563.10374pt x 421.575pt>
+File: Figures/confidenceRegionLR.jpg Graphic file (type jpg)
+
+<use Figures/confidenceRegionLR.jpg>
+Package pdftex.def Info: Figures/confidenceRegionLR.jpg used on input line 344.
+
+(pdftex.def)             Requested size: 234.8775pt x 175.8445pt.
+
+<Figures/confidenceLR.jpg, id=166, 563.10374pt x 421.575pt>
+File: Figures/confidenceLR.jpg Graphic file (type jpg)
+
+<use Figures/confidenceLR.jpg>
+Package pdftex.def Info: Figures/confidenceLR.jpg used on input line 356.
+(pdftex.def)             Requested size: 234.8775pt x 175.8445pt.
+ [7 <D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidenceRegionLR.jpg
+>]
+<Figures/confidenceRegion.jpg, id=175, 563.10374pt x 421.575pt>
 File: Figures/confidenceRegion.jpg Graphic file (type jpg)
 
 <use Figures/confidenceRegion.jpg>
-Package pdftex.def Info: Figures/confidenceRegion.jpg used on input line 323.
+Package pdftex.def Info: Figures/confidenceRegion.jpg used on input line 372.
 (pdftex.def)             Requested size: 234.8775pt x 175.8445pt.
 
-<Figures/confidence.jpg, id=134, 559.08875pt x 388.45125pt>
+<Figures/confidence.jpg, id=177, 559.08875pt x 388.45125pt>
 File: Figures/confidence.jpg Graphic file (type jpg)
 
 <use Figures/confidence.jpg>
-Package pdftex.def Info: Figures/confidence.jpg used on input line 335.
+Package pdftex.def Info: Figures/confidence.jpg used on input line 384.
 (pdftex.def)             Requested size: 234.8775pt x 163.1899pt.
+ [8 <D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidenceLR.jpg>]
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 396.
 
-(D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.bbl [6]
-[7 <D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidenceRegion.jpg> <
-D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidence.jpg>])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 347.
- [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 347.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd"
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+(D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.bbl [9 <D:/K
+oli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidenceRegion.jpg> <D:/Koli/
+Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidence.jpg>])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 405.
+ [10]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 405.
 
 (D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 347.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 347.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 405.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 405.
 Package rerunfilecheck Info: File `SPSToolbox-manual.eng.out' has not changed.
-(rerunfilecheck)             Checksum: D86AACE76B52B202532BE2EB3CE94C7A;1125.
+(rerunfilecheck)             Checksum: 36F0557E49C9A8242DFC7D598E0A24F3;1520.
  ) 
 Here is how much of TeX's memory you used:
- 6556 strings out of 494045
- 91969 string characters out of 3145966
- 173611 words of memory out of 3000000
- 9699 multiletter control sequences out of 15000+200000
- 40628 words of font info for 76 fonts, out of 3000000 for 9000
+ 6614 strings out of 494045
+ 92960 string characters out of 3145966
+ 173889 words of memory out of 3000000
+ 9741 multiletter control sequences out of 15000+200000
+ 41249 words of font info for 78 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  36i,6n,28p,716b,430s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
@@ -437,12 +458,13 @@ MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files (x86)/MiKT
 eX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmsy5.pfb><C:/Program Files (x86)/MiKTeX 2.
 9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
-onts/type1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/
-urw/times/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/u
-tmri8a.pfb>
-Output written on SPSToolbox-manual.eng.pdf (8 pages, 214094 bytes).
+onts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
+1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times
+/utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pf
+b>
+Output written on SPSToolbox-manual.eng.pdf (10 pages, 301210 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 35 named destinations out of 1000 (max. 500000)
- 147 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 252 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 197 words of extra memory for PDF output out of 10000 (max. 10000000)
 
