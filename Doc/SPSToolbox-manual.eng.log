@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.13)  2 MAY 2013 14:41
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2012.4.13)  3 MAY 2013 14:44
 entering extended mode
 **SPSToolbox-manual.eng.tex
 (D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.tex
@@ -436,15 +436,15 @@ Package pdftex.def Info: Figures/confidence.jpg used on input line 416.
  <D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidenceRegion.jpg>] [1
 0 <D:/Koli/Egyetem/PHD/Software/SPSToolbox/Doc/Figures/confidence.jpg>]
 (D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 439.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 441.
 
 [11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 439.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 441.
  (D:\Koli\Egyetem\PHD\Software\SPSToolbox\Doc\SPSToolbox-manual.eng.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 439.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 439.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 441.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 441.
 Package rerunfilecheck Info: File `SPSToolbox-manual.eng.out' has not changed.
 (rerunfilecheck)             Checksum: 00624814DA6950C8BC079BC6B3B52927;1526.
  ) 
@@ -470,7 +470,7 @@ onts/type1/urw/courier/ucrr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type
 1/urw/times/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times
 /utmr8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on SPSToolbox-manual.eng.pdf (11 pages, 309721 bytes).
+Output written on SPSToolbox-manual.eng.pdf (11 pages, 309832 bytes).
 PDF statistics:
  256 PDF objects out of 1000 (max. 8388607)
  45 named destinations out of 1000 (max. 500000)
