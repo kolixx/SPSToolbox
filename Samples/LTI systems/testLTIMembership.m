@@ -47,8 +47,9 @@ N = (rand(length(U),1)-0.5)*5;
 %generate a model for the pem estimate  
 data = iddata(YN, U, 1);
 
-%[na nb nc nd nf nk]
-sys = pem(data, [0 1 0 0 2 2], 'InitialCondition','zero',...
+%for pem: [na nb nc nd nf nk]
+%for bj: [nb nc nd nf nk]
+sys = bj(data, [1 0 0 2 2], 'InitialCondition','zero',...
       'Criterion', 'Trace', 'Display', 'On');
 
 % create the pem model
