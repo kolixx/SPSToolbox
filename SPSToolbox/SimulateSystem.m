@@ -65,7 +65,12 @@ function [Y] = SimulateSystem(B, A, U)
             c(k) = ssC*ssA^(k-2)*ssB;
         end
     end
-    H = toeplitz(c, zeros(1, N));
+     
+    % make the first element of the toeplitz row equal to the first element
+    % of the toeplitz column so there is no diagonal conflict
+    r = [c(1) zeros(1, N-1)];
+    
+    H = toeplitz(c, r);
     Y = H*U;
     
 %     -----------    
