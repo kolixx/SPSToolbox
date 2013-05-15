@@ -94,7 +94,7 @@
 
 \section{Introduction}
 
-This document briefly introduces a hypothesis testing procedure called sign perturbed sums (SPS) and describes the use of the Matlab Toolbox that implements it. The method was developed in a series of papers \cite{Csaji2012Sysid, Csaji2012CDC, Kolumban2013CDC} and it allows hypothesis testing of parameters in case of linear regression problems and in case of LTI Box Jenkins models (\cite{ljung1999SysId}). The important features of the method are that the only assumption about the noise or error values is that they have symmetric distribution about zero and that no asymptotic theory is used. This means that the confidence of the hypothesis test is rigorous.
+This paper briefly introduces a hypothesis testing procedure called sign perturbed sums (SPS) and describes the use of the Matlab Toolbox that implements it. The method was developed in a series of papers \cite{Csaji2012Sysid, Csaji2012CDC, Kolumban2013CDC} and it allows hypothesis testing of parameters in case of linear regression problems and in case of LTI Box Jenkins models (\cite{ljung1999SysId}). The important features of the method are that the only assumption about the noise or error values is that they have symmetric distribution about zero and that no asymptotic theory is used. This means that the confidence of the hypothesis test is rigorous.
 
 For instruction on installation and licensing see Section~\ref{sec:Deploy}.
 
@@ -143,7 +143,7 @@ $\alpha(0, k) = 1$ is the first sign sequence and it is fixed.
 \hat{Y}^{(i)}_k(\theta) = \theta + \hat{N}_k(\theta) = \theta +  \alpha(i,k)(y_k - \theta)
 \]
 
-Quadratic cost function is used for the estimation of the unknown parameter. The estimation is given by the solution of the normal equation to this. For each noise realization there is a different cost function and a different normal equation. It is important that from this point on there are $m$ independent identification problems that are considered.
+Quadratic cost function is used for the estimation of the unknown parameter. The estimation is given by the solution of the normal equation to this. For each noise realization there is a different cost function and a different normal equation. It is important that from this point on there are $m$ independent identification problems that are considered. These are indexed with $i=0,\ldots,m-1$ and the corresponding measurements $\hat{Y}^{(i)}_k(\theta)$ are considered as constant given values. Their dependence on $\theta$ is made explicit because their value depends on it but in calculating the cost function values $J^{(i)}$ they are thought of as constants.
 \[
 J^{(i)} = \sum_{k=1}^N (\hat{Y}^{(i)}_k(\theta) - \theta)^2
 \]
@@ -165,9 +165,9 @@ J^{(i)} = \sum_{k=1}^N (\hat{Y}^{(i)}_k(\theta) - \theta)^2
 
 8. The $S_i$ values are the gradient vectors of the cost function at $\theta$ in the different identification scenarios.
 \[
-S_i = \sum_{k=1}^N -2 \hat{Y}^{(i)}_k(\theta) + 2 N \theta =
-      \sum_{k=1}^N -2 \left[ \theta + \alpha(i,k)(y_k - \theta)\right] + 2 N \theta =
-      \sum_{k=1}^N -2 \alpha(i,k)(y_k - \theta)
+S_i = 2 N \theta - \sum_{k=1}^N 2 \hat{Y}^{(i)}_k(\theta) =
+      2 N \theta - \sum_{k=1}^N 2 \left[ \theta + \alpha(i,k)(y_k - \theta)\right] =
+      - \sum_{k=1}^N 2 \alpha(i,k)(y_k - \theta)
 \]
 
 9. Create the different $Z_i$ values which measure the length of the gradient weighted with the inverse of the covariance matrix
@@ -193,8 +193,8 @@ As we go to infinity with $\theta$ it is easy to see in this simple case that $Z
 This section describes the functionality of methods belonging to the toolbox. The main functions of the toolbox are
 \begin{itemize}
 \item GenerateSPSSetup: generates the random quantities required by the method, containing the random signs and the random permutation to resolve ties.
-\item IsModelPartOfSPSConfidenceSet: examines if a given Box-Jenkins model belongs to the confidence set defined by the given sps setup and the measurement data.
-\item IsRegressionParamPartOfSPSConfidenceSet: examines if a given parameter belongs to the confidence set defined by the given sps setup and the measurement data in the linear regression case.
+\item IsModelPartOfSPSConfidenceSet: examines if a given Box-Jenkins model belongs to the confidence set defined by the given SPS setup and the measurement data.
+\item IsRegressionParamPartOfSPSConfidenceSet: examines if a given parameter belongs to the confidence set defined by the given SPS setup and the measurement data in the linear regression case.
 \end{itemize}
 
 \subsection{GenerateSPSSetup}
@@ -210,7 +210,7 @@ Input parameters:
 \end{itemize}
 Output parameters:
 \begin{itemize}
-\item sps: A structure containing an $N \times m$ matrix with the random sign sequences (sps.Signs). The first column is the all-one column. The random permutation for tie resolution (sps.TieOrder) and the confidence related values are also stored (sps.q, sps.m, sps.Confidence).
+\item sps: A structure containing an $N \times m$ matrix with the random sign sequences (sps.Signs). The first column is the all-one column. The random permutation for tie resolution (sps.TieOrder) and the values related to the confidence level are also stored (sps.q, sps.m, sps.Confidence).
 \end{itemize}
 
 
@@ -228,11 +228,12 @@ y[k] = \frac{B(q^{-1})}{A(q^{-1})F(q^{-1})}u[k] + \frac{C(q^{-1})}{A(q^{-1})D(q^
 \]
 The coefficients of the polynomials are put as row vectors into a Matlab structure. The vectors should start with their first non-zero elements. $A$, $F$, $D$ and $C$ should be monic (first element 1), $\deg(AF) \geq \deg(B)$, $\deg(AD) = \deg(C)$ and $C$ should be a stable polynomial.
 \item sps: an SPS setup generated by GenerateSPSSetup.
-\item Y,U: column vectors of similar length containing the measured outputs and inputs respectively.
+\item Y, U: column vectors of the same length containing the measured outputs and inputs respectively.
 \end{itemize}
 Output parameters:
 \begin{itemize}
-\item inconf: Boolean value showing that the given model is inside the confidence set or not.
+\item inconf: Boolean value showing whether the given model is inside the confidence set or not.
+\item $Z$: The vector containing the $Z_i$ values that was used to determine the rank of $Z_0$.
 \end{itemize}
 
 \subsection{IsRegressionParamPartOfSPSConfidenceSet}
@@ -249,11 +250,12 @@ Input parameters:
 \item theta: a column vector of length $n_\theta$ containing the coefficients of the linear model
 \item sps: an SPS setup generated by GenerateSPSSetup.
 \item Y: column vector of length $N$ containing the measured outputs.
-\item X: an $n_\theta$ by $N$ matrix containing the regressor vectors as columns.
+\item X: an $n_\theta$-by-$N$ matrix containing the regressor vectors as columns.
 \end{itemize}
 Output parameters:
 \begin{itemize}
-\item inconf: Boolean value showing that the given model is inside the confidence set or not.
+\item inconf: Boolean value showing whether the given model is inside the confidence set or not.
+\item $Z$: The vector containing the $Z_i$ values that was used to determine the rank of $Z_0$.
 \end{itemize}
 
 \subsection{CalculateBJGradient}
@@ -265,7 +267,7 @@ This routine calculates the gradient of the prediction errors for a given model 
 Input parameters:
 \begin{itemize}
 \item model: just as in the case of IsModelPartOfSPSConfidenceSet
-\item Y,U: column vectors of similar length containing the measured outputs and inputs respectively.
+\item Y, U: column vectors of the same length containing the measured outputs and inputs respectively.
 \end{itemize}
 Output parameters:
 \begin{itemize}
@@ -281,7 +283,7 @@ This routine calculates the noise sequence needed to generate the given measurem
 Input parameters:
 \begin{itemize}
 \item model: just as in the case of IsModelPartOfSPSConfidenceSet
-\item Y,U: column vectors of similar length containing the measured outputs and inputs respectively.
+\item Y, U: column vectors of the same length containing the measured outputs and inputs respectively.
 \end{itemize}
 Output parameters:
 \begin{itemize}
@@ -330,7 +332,7 @@ This routine calculates the output of a Box-Jenkins model with a given noise rea
 Input parameters:
 \begin{itemize}
 \item model: just as in the case of IsModelPartOfSPSConfidenceSet
-\item U,N: column vectors of similar length containing the inputs and the noise samples respectively.
+\item U, N: column vectors of the same length containing the inputs and the noise samples respectively.
 \end{itemize}
 Output parameters:
 \begin{itemize}
@@ -345,7 +347,7 @@ This routine calculates the output of a system in the form $\frac{B(q^{-1})}{A(q
 \end{verse}
 Input parameters:
 \begin{itemize}
-\item B,A: row vectors containing the coefficients of the polynomials $B$ and $A$. It is supposed that they have the same length.
+\item B, A: row vectors containing the coefficients of the polynomials $B$ and $A$. They should have the same length. Pad with zeros if needed.
 \item U: column vector containing the input values.
 \end{itemize}
 Output parameters:
@@ -358,7 +360,7 @@ Output parameters:
 \section{Examples}
 \label{sec:Ex}
 
-Along with the code of the toolbox, some example scripts are also attached to illustrate the usage of the routines. These can be found in the "Samples" folder. Samples for the linear regression hypothesis testing are in the "Linear regression" sub-folder, whereas samples related to Box-Jenkins models are in the "LTI systems" sub-folder.
+Along with the code of the toolbox, some example scripts are also attached to illustrate the usage of the routines. These can be found in the "Samples" folder. Samples for the linear regression hypothesis testing are in the "Linear regression" subfolder, whereas samples related to Box-Jenkins models are in the "LTI systems" subfolder.
 
 \subsection{Linear regression}
 
@@ -368,7 +370,7 @@ Least squares estimates always belong to the SPS confidence set as in their case
 
 \subsubsection{showConfidenceRegion.m}
 
-The structure of the confidence sets corresponding to a given SPS setup and data can be complex. This examples defines a fine grained grid around the LS estimate of a selected two parameter model and evaluates the membership on every grid point. The sample code demonstrates how to generate and plot confidence regions in two dimensions, the result is given on Figure~\ref{fig:ConfidenceRegionLR}.
+The structure of the confidence sets corresponding to a given SPS setup and data can be complex. This example defines a fine grained grid around the LS estimate of a selected two parameter model and evaluates the membership on every grid point. The sample code demonstrates how to generate and plot confidence regions in two dimensions, the result is given in Figure~\ref{fig:ConfidenceRegionLR}.
 
 \begin{figure}[htb]
  \centerline{\includegraphics[width=.5\columnwidth]{Figures/confidenceRegionLR.jpg}}
@@ -398,11 +400,11 @@ Prediction error estimates always belong to the SPS confidence set as in their c
 
 \subsubsection{showConfidenceRegion.m}
 
-The structure of the confidence sets corresponding to a given SPS setup and data can be complex. This examples defines a fine grained grid around the PEM estimate of a selected two parameter model and evaluates the membership on every grid point. The sample code demonstrates how to generate and plot confidence regions in two dimensions, the result is given on Figure~\ref{fig:ConfidenceRegion}.
+The structure of the confidence sets corresponding to a given SPS setup and data can be complex. This examples defines a fine grained grid around the PEM estimate of a selected two parameter model and evaluates the membership on every grid point. The sample code demonstrates how to generate and plot parts of the confidence regions in two dimensions, the result is given on Figure~\ref{fig:ConfidenceRegion}.
 
 \begin{figure}[htb]
  \centerline{\includegraphics[width=.5\columnwidth]{Figures/confidenceRegion.jpg}}
- \caption{The 0.85 confidence region for a first order nominal system and output error noise model.}
+ \caption{Part of the 0.85 confidence region for a first order nominal system and output error noise model.}
  \label{fig:ConfidenceRegion}
 \end{figure}
 

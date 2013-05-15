@@ -1,6 +1,18 @@
-function [inconf] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
+function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
 %
 %  Gets if a given model is part of the sps confidence set or not.
+%
+%  Input arguments:
+%     - the model that describes the system structure
+%     - sps: the sps setup
+%     - Y, U: column vectors of the same size containing the output and the
+%     input respectively
+%
+%  Output arguments:
+%     - inconf: boolean indicator of the membership to the confidence set
+%     - Z: the different Z values that were used to determine the
+%     membership
+%
 %
 
 %  Copyright 2013 Sándor Kolumbán (kolumban@aut.bme.hu)

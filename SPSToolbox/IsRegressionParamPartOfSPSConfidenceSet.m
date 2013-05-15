@@ -1,4 +1,4 @@
-function [inconf] = IsRegressionParamPartOfSPSConfidenceSet(theta, sps, Y, X)
+function [inconf, Z] = IsRegressionParamPartOfSPSConfidenceSet(theta, sps, Y, X)
 %
 %  Gets if a given parameter vector theta is part of the sps confidence set or not.
 %
@@ -12,7 +12,8 @@ function [inconf] = IsRegressionParamPartOfSPSConfidenceSet(theta, sps, Y, X)
 %
 %  Ouptut parameter:
 %    - inconf: true if the given model was part of the confidence set
-%
+%     - Z: the different Z values that were used to determine the
+%     membership
 
 %  Copyright 2013 Sándor Kolumbán (kolumban@aut.bme.hu)
 %
