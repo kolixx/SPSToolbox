@@ -1,4 +1,4 @@
-function [Psi] = CalculateBJGradient(model, Y, U)
+function [Psi] = CalculateBJGradientYU(model, Y, U)
 %
 %   Calculates the gradient of the prediction errors or noise ralizaions
 %   from the output and input and model data. These column vectors are
@@ -6,6 +6,17 @@ function [Psi] = CalculateBJGradient(model, Y, U)
 %
 %   The order of the first dimension is the following: a1, ..., b0, ...,
 %   f1, ..., c1, ...., d1, ....
+%
+%   Input parameters: 
+%      - model: the model structure describing the model
+%      - Y, U: the measured output and input of the system as colum
+%      vectors (dimension N x 1).
+%
+%   Output parameters:
+%      - Psi: an n_theta times N dimension matrix containing the
+%      derivatives of the prediction errors with respect to the model
+%      parameters as columns.
+%
 %
 
 %  Copyright 2013 Sándor Kolumbán (kolumban@aut.bme.hu)

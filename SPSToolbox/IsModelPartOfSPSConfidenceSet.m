@@ -45,14 +45,20 @@ function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
         NN(:,k) = NN(:,1).*sps.Signs(:,k);
     end
     
-    % get the perturbed outputs
-    YY = zeros(length(Y), sps.m);
-    YY(:,1) = Y;
-    % this should be the nominal response
-    Y1 = SimulateBJSample(model, U, NN(:,1));
-    for k=2:sps.m
-        YY(:,k) = SimulateBJSample(model, U, NN(:,k));
-    end
+%     % get the perturbed outputs
+%     ------ this is only needed, if the gradients are calculated based on
+%            Y and U (and to give a more didactic presentation of the SPS method)
+%            but the values are only needed if the gradients are calculated
+%            using CalculateBJGradientYU
+%     ------
+%     YY = zeros(length(Y), sps.m);
+%     YY(:,1) = Y;
+%     % this should be the nominal response
+%     Y1 = SimulateBJSample(model, U, NN(:,1));
+%     for k=2:sps.m
+%         YY(:,k) = SimulateBJSample(model, U, NN(:,k));
+%     end
+%     ------
     
     % calculate the psi matrix for each realization
     % calcualte Z_k value for the given ralization, and put it into a
@@ -60,7 +66,13 @@ function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
     Z = zeros(1, sps.m);
     
     for k=1:sps.m
-        [Psi] = CalculateBJGradient(model, YY(:,k), U);
+        
+        %------ Calculate the gradinets using Y and U
+        %       Calculation based on the noise samples is faster  
+        %------
+        %[Psi] = CalculateBJGradientYU(model, YY(:,k), U);
+        %------
+        [Psi] = CalculateBJGradientNU(model, NN(:,k), U);
         
         % sum l=1..n alpha it psi t Nt
         Sum = Psi*NN(:,k);
