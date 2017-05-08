@@ -1,4 +1,4 @@
-function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
+function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U, performanceMeasure)
 %
 %  Gets if a given model is part of the sps confidence set or not.
 %
@@ -7,6 +7,8 @@ function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
 %     - sps: the sps setup
 %     - Y, U: column vectors of the same size containing the output and the
 %     input respectively
+%     - performanceMeasure: a function handle to evaluate DP peformance
+%
 %
 %  Output arguments:
 %     - inconf: boolean indicator of the membership to the confidence set
@@ -60,27 +62,13 @@ function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U)
 %     end
 %     ------
     
-    % calculate the psi matrix for each realization
     % calcualte Z_k value for the given ralization, and put it into a
     % vector
     Z = zeros(1, sps.m);
     
     for k=1:sps.m
-        
-        %------ Calculate the gradinets using Y and U
-        %       Calculation based on the noise samples is faster  
-        %------
-        %[Psi] = CalculateBJGradientYU(model, YY(:,k), U);
-        %------
-        [Psi] = CalculateBJGradientNU(model, NN(:,k), U);
-        
-        % sum l=1..n alpha it psi t Nt
-        Sum = Psi*NN(:,k);
-         
-        [~,R] = qr(Psi.');
-        Cov = R.'*R;
-        
-        Z(k) = Sum.'/Cov* Sum;
+        %GetSPSdefinedPerformance(model,  NN(:,k), U);
+        Z(k) = feval(performanceMeasure, model,  NN(:,k), U);
     end
     
     % get the order of Z(1)
