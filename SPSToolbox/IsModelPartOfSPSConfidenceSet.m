@@ -17,7 +17,7 @@ function [inconf, Z] = IsModelPartOfSPSConfidenceSet(model, sps, Y, U, performan
 %
 %
 
-%  Copyright 2013 Sándor Kolumbán (kolumban@aut.bme.hu)
+%  Copyright 2013 Sándor Kolumbán (s.kolumban@tue.nl)
 %
 %  The program is distributed under the terms of the GNU General Public License.
 %

@@ -13,7 +13,7 @@ function [N] = CalculateBJNoiseRealization(model, Y, U)
 %  Output arguments:
 %    - N: column vector of length K containing the noise samples N[1] ... N[K]
 
-%  Copyright 2013 Sándor Kolumbán (kolumban@aut.bme.hu)
+%  Copyright 2013 Sándor Kolumbán (s.kolumban@tue.nl)
 %
 %  The program is distributed under the terms of the GNU General Public License.
 %
